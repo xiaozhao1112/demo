@@ -1,0 +1,33 @@
+106.15.58.17  IP地址
+root
+Broadmesse@2017
+
+数据库账号密码
+106.15.58.17:9000
+root
+daolanRoot
+
+xc.100uv.cn
+root
+Wa162811
+
+数据库连接
+xc.100uv.cn :9000
+root
+xcRoot
+
+公司官网
+116.62.38.138
+administrator
+Ntcsh1357
+
+洗车工小程序账号密码
+325748048@qq.com
+wa1628win
+
+用户小程序账号密码
+微信小程序
+https://mp.weixin.qq.com
+
+15580126@qq.com
+wa1628win
