@@ -12,9 +12,9 @@ lubinyu123.
 root
 daolanRoot
 
-xc.100uv.cn
+47.103.194.108
 root
-Wa162811
+Wa1628win
 
 数据库连接
 xc.100uv.cn :9000
