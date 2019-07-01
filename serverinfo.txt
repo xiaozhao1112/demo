@@ -23,8 +23,9 @@ xcRoot
 
 公司官网
 116.62.38.138
-administrator
-Ntcsh1357
+root
+Broadmesse@2019
+
 
 洗车工小程序账号密码
 325748048@qq.com
