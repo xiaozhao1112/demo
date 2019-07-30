@@ -1,0 +1,35 @@
+
+容器：
+docker ps  运行中的容器列表
+docker ps -a 全部容器列表
+docker logs -f  容器id  查看日志
+docker exec -it   容器名称/容器id /bin/bash  进入容器
+docker cp 目录 容器id:目录  主机copy到容器
+docker cp 容器id:目录 目录   容器copy到主机
+apt-get update  更新容器镜像
+ctrl+c  容器内进程终止
+ctrl+p ctrl+q  退出，不终止容器进程
+
+-d 后台运行容器
+-i  -t 交互模式运行容器  为容器分配一个伪终端
+-p 指定端口映射
+-P 随机端口映射
+--name 容器名称
+docker start 启动容器
+docker stop 停止容器
+docker restart 重启容器
+docker kil 容器id  杀掉运行中的容器
+docker rm  容器名称/容器id  删除容器（容器必须是重启状态）
+docker rm -f 容器名称/容器id  强制删除容器
+docker rm -v 容器名称/容器id  删除容器，并删除容器挂载的数据卷
+docker create --name 容器名称  nginx（使用的镜像文件）  添加一个容器但不运行
+
+镜像：
+docker images 镜像列表
+docker run -t -i  镜像名称 /bin/bash  选择需要使用的镜像并且创建容器
+docker pull  镜像名称  下载镜像
+docker search 镜像名称  搜索镜像
+docker tag 容器id  用户名称、镜像源名(repository name)和新的标签名(tag)  设置镜像标签
+docker rmi `docker images | grep  "<none>" | awk '{print $3}'`  删除为none的全部镜像
+docker rmi -f runoob/ubuntu:v4 强制删除镜像
+docker rmi  runoob/ubuntu:v4  删除镜像

@@ -1,0 +1,7 @@
+laravel 资料：
+
+判断请求    isMethod
+跨域解决方案下载cors扩展包
+orm 分页  take 限制条数 skip 偏移量
+easywechat 5.6版本下载version为3.0   composer require "overtrue/laravel-wechat:~3.0"
+安装 Simple QrCode 生成二维码的包  "simplesoftwareio/simple-qrcode": "~1"

@@ -1,0 +1,11 @@
+ervice crond start     //启动服务
+service crond stop      //关闭服务
+service crond restart   //重启服务
+service crond reload    //重新载入配置
+service crond status    //查看crontab服务状态
+
+crontab -e 编辑配置文件
+crontab -r : 删除目前配置信息
+crontab -l : 列出配置信息
+
+*/1 * * * * /usr/bin/curl http://localhost/xiaochu/openApi/calCrown.php  每分钟执行一次
