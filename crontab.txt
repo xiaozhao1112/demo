@@ -9,3 +9,4 @@ crontab -r : 删除目前配置信息
 crontab -l : 列出配置信息
 
 */1 * * * * /usr/bin/curl http://localhost/xiaochu/openApi/calCrown.php  每分钟执行一次
+1

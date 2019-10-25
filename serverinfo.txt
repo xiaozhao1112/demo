@@ -7,12 +7,9 @@ Broadmesse@2017
 root
 lubinyu123.
 
-图片服务器
-47.103.211.177
-phone.broadmesse.net (ssh)
-root:Broadmesse2018 
-数据库连接（图片服务器）
-root:phoneRoot@localhost:3306 9000
+47.99.156.154
+idata.broadmesse.net
+root:idataRoot@localhost:3306 |9001
 
 数据库账号密码
 106.15.58.17:9000
