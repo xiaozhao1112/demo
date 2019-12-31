@@ -235,3 +235,145 @@ abstract class Aa
         echo "run";
     }
 }
+
+/**
+ * php 重写
+ * 当父类与子类有一个方法 参数 名称都一样 子类会覆盖父类的方法
+ * 在实行方法覆盖的时候，访问修饰符可以是不一样的，但是子类的访问权限必须大于父类的访问权限
+ */
+class B extends A{
+    public function aaa()
+    {
+        echo 'Baaa';
+    }
+}
+
+$b  = new B;
+echo $b->aaa();
+
+class A {
+    public function aaa(){
+        echo 'Aaaa';
+    }
+}
+
+/**
+ * php 重载 魔术方法
+ * 重载在“通常面向对象语言”中的含义：是指，在一个类（对象）中，有多个名字相同但形参不同的方法的现象；
+ * 在php中 当对一个对象或者类使用不存在的属性或者方法时，对于出错信息进行处理
+ */
+class A
+{
+    public $p1 = 1;
+
+    //当对一个对象不存在的属性进行取值的时候 自动调用__GET
+    function __get($name)
+    {
+        echo "$name 暂时没有定义";
+    }
+    //当对一个对象不存在的属性进行赋值的时候 自动调用__SET
+    public function __set($name, $value)
+    {
+        // TODO: Implement __set() method.
+        echo "$name 不存在不能赋值 $value";
+    }
+    //当对一个对象不存在的属性进行判断的时候 自动调用__isset
+    public function __isset($name)
+    {
+        // TODO: Implement __isset() method.
+        echo "该 $name 没有定义不能进行判断";
+    }
+    //销毁
+    public function __unset($name)
+    {
+        // TODO: Implement __unset() method.
+        echo "该 $name 属性没有定义 不能删除";
+    }
+    //一个对象不存在的方法进行调用的时候 自动调用__call
+    public function __call($name, $arguments)
+    {
+        echo "$name 该方法没有定义";
+    }
+    //将对象转为字符串调用时 比如 echo 直接输出
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
+        echo "不能已字符串输出";
+    }
+
+    //把对象当成一个函数去执行 调用__invoke
+    public function __invoke()
+    {
+        // TODO: Implement __invoke() method.
+        echo "invoke";
+    }
+    //
+    public function __clone()
+    {
+        // TODO: Implement __clone() method.
+        echo "it is not clone";
+    }
+
+    //
+    public function text()
+    {
+        echo 'text';
+    }
+
+    public function text1()
+    {
+        echo 'text1';
+    }
+}
+$a = new A;
+echo $a->aaa();//__call
+echo "<br>";
+echo $a->p1;
+echo "<br>";
+echo $a->p2;//__get
+echo "<br>";
+echo $a->p2  = 2;//__set
+echo "<br>";
+echo isset($a->p2);//__isset
+echo "<br>";
+unset($a->p2);//__isset
+echo "<br>";
+echo $a();//__invoke
+echo "<br>";
+echo $a;//__tostring
+echo "<br>";
+clone $a;//__clone
+
+/**
+ * php多继承 trait 
+ * 通过在类中使用use 修饰用trait 
+ * 多个类中有相同的方法可以通过 insteadof 代替 或者 as 重命名 
+ * 可以修改访问控制  还可以使用抽象方法、静态属性、静态方法
+ */
+class B extends A{
+    use Dog;
+    public function aa()
+    {
+        echo "this is b";
+    }
+}
+
+$b  = new B();
+$b->aa();
+echo "<br>";
+echo $b->bark();
+echo "<br>";
+echo $b->eat();
+echo "<br>";
+trait Dog{
+    public $name = 'dog';
+    public function bark(){
+        echo 'this is  dog';
+    }
+}
+
+class A{
+    public function eat(){
+        echo "this is a";
+    }
+}
