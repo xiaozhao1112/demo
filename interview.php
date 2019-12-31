@@ -152,3 +152,86 @@ for ($i = 0; $i < $c - 1; $i++) {
     }
 }
 print_r($res);
+
+/**
+ * 接口类
+ * interface定义 不能继承 只能通过implements操作符调用  指定某个类必须实现全部方法，不需要定义具体内容 否则会报致命错误
+ * 方法只能使用public 定义  
+ */
+interface Aa
+{
+    public function aa($a);
+
+    public function bb($b);
+
+    public function cc($c);
+
+}
+
+interface Bb
+{
+    public function vv();
+}
+
+class Aaa implements Aa,Bb
+{
+    public function aa($a)
+    {
+        return $a;
+    }
+
+    public function bb($b)
+    {
+        return $b;
+    }
+    public function cc($c)
+    {
+        return $c;
+    }
+    public function vv()
+    {
+        echo 'vv';
+    }
+}
+
+$a  = new Aaa();
+echo $a->aa('aa');
+echo "<br>";
+echo $a->vv();
+
+/**
+ * 抽象类与抽象方法
+ * 抽象类：可以被继承extends，abstract来修饰，不能直接new对象  只要类里面存在一个抽象方法都属于抽象类，必须要用abstract来修饰 在抽象类中可以有不是抽象方法与成员属性
+ * 抽象方法：必须要用abstract来修饰并且没有结构体（在方法声明的时候没有大括号以及内容）
+ * 子类必须实现父类中全部的抽象方法，没有全部实现的话，子类还是一个抽象类，还不能被实例化
+ */
+class B extends Aa
+{
+    //子类必须实现父类的抽象方法，否则是致命的错误。
+    public function say()
+    {
+        echo '这是say方法,实现了抽象方法';
+    }
+
+    public function eat($argument)
+    {
+        echo '抽象类可以有参数 ，输出参数：'.$argument;
+    }
+}
+$b =new B;
+$b->say();
+echo '<br>';
+$b->eat('apple');
+echo '<br>';
+$b->run();
+abstract class Aa
+{
+    abstract public function say();
+
+    abstract public function eat($a);
+
+    public function run()
+    {
+        echo "run";
+    }
+}
