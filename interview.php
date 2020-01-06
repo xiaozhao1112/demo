@@ -154,6 +154,32 @@ for ($i = 0; $i < $c - 1; $i++) {
 print_r($res);
 
 /**
+ * 快速排序
+ */
+$arr  = [232,31,321,435,33421];
+$result  = quickSort($arr);
+print_r($result);
+function quickSort($arr){
+    $count  = count($arr);
+    if ($count <= 1) {
+        return $arr;
+    }
+    $res  = $arr[0];
+    $one  = [];
+    $two  = [];
+    for ($i=1; $i <$count ; $i++) { 
+        if ($arr[$i] > $res) {
+            $one[]   = $arr[$i];
+        }else{
+            $two[]   = $arr[$i];
+        }
+    }
+    $one   = quickSort($one);
+    $two   = quickSort($two);
+    return array_merge($two,[$res],$one);
+}
+
+/**
  * 接口类
  * interface定义 不能继承 只能通过implements操作符调用  指定某个类必须实现全部方法，不需要定义具体内容 否则会报致命错误
  * 方法只能使用public 定义  
