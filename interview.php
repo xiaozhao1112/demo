@@ -403,3 +403,57 @@ class A{
         echo "this is a";
     }
 }
+
+/**
+ * 递归
+ */
+$array = array(
+array('id' => 1, 'pid' => 0, 'name' => '河北省'),
+array('id' => 2, 'pid' => 0, 'name' => '北京市'),
+array('id' => 3, 'pid' => 1, 'name' => '邯郸市'),
+array('id' => 4, 'pid' => 2, 'name' => '朝阳区'),
+array('id' => 5, 'pid' => 2, 'name' => '通州区'),
+array('id' => 6, 'pid' => 4, 'name' => '望京'),
+array('id' => 7, 'pid' => 4, 'name' => '酒仙桥'),
+array('id' => 8, 'pid' => 3, 'name' => '永年区'),
+array('id' => 9, 'pid' => 1, 'name' => '武安市'),
+);
+
+$res   = getTree($array);
+
+foreach ($res as $key => $value) {
+    echo str_repeat('--', $value['level']),$value['name']."<br>";
+}
+function getTree($arr,$pid=0,$level=0){
+    static $list   = [];
+    foreach ($arr as $key => $value) {
+        if ($value['pid'] == $pid) {
+            $value['level']  = $level;
+            $list[]  = $value;
+            unset($arr[$key]);
+            getTree($arr,$value['id'],$level+1);
+        }
+    }
+    return $list;
+}
+
+$arr = [
+    ['0'=>[
+        'da'=>32
+    ]]
+];
+$da  = res($arr);
+print_r($da);
+function res($arr){
+    $re   = 1;
+    foreach ($arr as $key => $value) {
+        if (is_array($value)) {
+            $deep   = res($value)+1;
+            if ($deep > $re) {
+                $re  = $deep;
+            }
+        }
+    }
+    return $re;
+}
+print_r($arr);die;
