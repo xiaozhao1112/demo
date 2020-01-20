@@ -6,56 +6,31 @@
  * instanceof  判断一个对象是否是某个类的实例（判断是否实例化 存在则直接返回）
  * 单例模式与静态变量的区别：单例模式强制类只能实力化一次，静态变量为了减少new的操作，但是不能阻止new和clone
  */
-class A
+class Singleton
 {
-    public function show()
-    {
-        echo "我是A类函数，要调用B类函数和C类函数<br/>";
-        $b = Unit::getInstance('B');
-        $b->show();
-        $c = Unit::getInstance('C');
-        $c->show('A');
-    }
-}
+    //创建静态私有的变量保存该类对象
+    static private $instance;
 
-class B
-{
-    public function show()
-    {
-        echo "我是B类函数，要调用C类函数<br/>";
-        $c = Unit::getInstance('C');
-        $c->show('B');
-    }
-}
+    //防止使用new直接创建对象
+    private function __construct(){}
 
-class C
-{
-    public function __construct()
-    {
-        echo "C类被创建<br>";
-    }
+    //防止使用clone克隆对象
+    private function __clone(){}
 
-    public function show($parm)
+    static public function getInstance()
     {
-        echo "我是C类函数，现在被{$parm}类函数调用<br/>";
-    }
-}
-
-class Unit
-{
-    static public function getInstance($class)
-    {
-        static $arr = null;
-        if (!isset($arr[$class]) || !$arr[$class] instanceof $class) {
-            $arr[$class] = new $class();
+        //判断$instance是否是Singleton的对象，不是则创建
+        if (!self::$instance instanceof self) {
+            self::$instance = new self();
         }
+        return self::$instance;
+    }
 
-        return $arr[$class];
+    public function test()
+    {
+        echo "我是一个单例模式";
     }
 }
-
-$a = new A();
-$a->show();
 
 /**
  * 工厂模式
