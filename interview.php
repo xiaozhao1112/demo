@@ -33,61 +33,168 @@ class Singleton
 }
 
 /**
- * 工厂模式
- * // 由工厂类根据参数来决定创建出哪一种产品类的实例；
- *定义一个创建对象的接口，让其子类自己决定实例化哪一个工厂类，工厂模式使其创建过程延迟到子类进行。
- *主要解决接口选择的问题。
- *一个调用者想创建一个对象，只要知道其名称就可以了。
-扩展性高，如果想增加一个产品，只要扩展一个工厂类就可以。
-屏蔽产品的具体实现，调用者只关心产品的接口。
+* 工厂方法模式：
+ *定义一个创建对象的接口，让子类决定哪个类实例化。 他可以解决简单工厂模式中的封闭开放原则问题。<www.phpddt.com整理>
  */
-// 抽象运算类
-abstract class Operation
-{
-    abstract public function getVal($i, $j); // 抽象方法不能包含方法体
+interface  people {
+    function  jiehun();
 }
-
-// 加法类
-class OperationAdd extends Operation
-{
-    public function getVal($i, $j)
-    {
-        return $i + $j;
+class man implements people{
+    function jiehun() {
+        echo '送玫瑰，送戒指！<br>';
     }
 }
-
-// 减法类
-class OperationSub extends Operation
-{
-    public function getVal($i, $j)
-    {
-        return $i - $j;
+  
+class women implements people {
+    function jiehun() {
+        echo '穿婚纱！<br>';
     }
 }
-
-//乘法类
-class OperationMul extends Operation
-{
-    public function getVal($i, $j)
-    {
-        return $i * $j;
+  
+interface  createMan {  // 注意了，这里是简单工厂本质区别所在，将对象的创建抽象成一个接口。
+    function create();
+  
+}
+class FactoryMan implements createMan{
+    function create() {
+        return  new man;
     }
 }
-
-//计数器工厂
-class CounterFactor
-{
-    // 工厂生产特定类对象方法
-    public static function createOperation($operation)
-    {
-        return new $operation;
+class FactoryWomen implements createMan {
+    function create() {
+        return new women;
     }
 }
+  
+class  Client {
+    // 简单工厂里的静态方法
+    function test() {
+        $Factory =  new  FactoryMan;
+        $man = $Factory->create();
+        $man->jiehun();
+         
+        $Factory =  new  FactoryWomen;
+        $man = $Factory->create();
+        $man->jiehun();
+    }
+}
+  
+$f = new Client;
+$f->test();
 
-$counter = CounterFactor::createOperation('OperationSub');
-echo $counter->getVal(10, 2);
-echo "<br>";
 
+/**
+ * 简单工厂模式
+ * 简单工厂又叫静态工厂方法模式，这样理解可以确定，简单工厂模式是通过一个静态方法创建对象的。
+ */
+interface  people {
+    function  jiehun();
+}
+class man implements people{
+    function jiehun() {
+        echo '送玫瑰，送戒指！<br>';
+    }
+}
+  
+class women implements people {
+    function jiehun() {
+        echo '穿婚纱！<br>';
+    }
+}
+  
+class SimpleFactoty {
+    // 简单工厂里的静态方法
+    static function createMan() {
+        return new     man;
+    }
+    static function createWomen() {
+        return new     women;
+    }
+     
+}
+  
+$man = SimpleFactoty::createMan();
+$man->jiehun();
+$man = SimpleFactoty::createWomen();
+$man->jiehun();
+
+
+/*
+抽象工厂：提供一个创建一系列相关或相互依赖对象的接口。
+注意：这里和工厂方法的区别是：一系列，而工厂方法则是一个。
+那么，我们是否就可以想到在接口create里再增加创建“一系列”对象的方法呢？
+*/
+interface  people {
+    function  jiehun();
+}
+class Oman implements people{
+    function jiehun() {
+        echo '美女，我送你玫瑰和戒指！<br>';
+    }
+}
+class Iman implements people{
+    function jiehun() {
+        echo '我偷偷喜欢你<br>';
+    }
+}
+  
+class Owomen implements people {
+    function jiehun() {
+        echo '我要穿婚纱！<br>';
+    }
+}
+  
+class Iwomen implements people {
+    function jiehun() {
+        echo '我好害羞哦！！<br>';
+    }
+}
+  
+interface  createMan {  // 注意了，这里是本质区别所在，将对象的创建抽象成一个接口。
+    function createOpen(); //分为 内敛的和外向的
+    function createIntro(); //内向
+  
+}
+class FactoryMan implements createMan{
+    function createOpen() {
+        return  new  Oman;
+    }
+    function createIntro() {
+        return  new Iman;
+    }
+}
+class FactoryWomen implements createMan {
+    function createOpen() {
+        return  new  Owomen;
+    }
+    function createIntro() {
+        return  new Iwomen;
+    }
+}
+  
+class  Client {
+    // 简单工厂里的静态方法
+    function test() {
+        $Factory =  new  FactoryMan;
+        $man = $Factory->createOpen();
+        $man->jiehun();
+         
+        $man = $Factory->createIntro();
+        $man->jiehun();
+         
+         
+        $Factory =  new  FactoryWomen;
+        $man = $Factory->createOpen();
+        $man->jiehun();
+         
+        $man = $Factory->createIntro();
+        $man->jiehun();
+         
+    }
+}
+  
+$f = new Client;
+$f->test();
 
 /**
  * 冒泡排序
